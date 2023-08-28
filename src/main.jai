@@ -13,6 +13,10 @@ GetRect :: #import "GetRect";
 #load "camera.jai";
 #load "text.jai";
 
+// Shaders links
+VERTEX_SHADER_PATH   : string = "shaders/default.vert";
+FRAGMENT_SHADER_PATH : string = "shaders/default.frag";
+
 // Engine consts
 WINDOW_TITLE_BAR : string = "The Floor Is Lava";
 WINDOW_WIDTH := 1024;
@@ -57,6 +61,9 @@ main :: () {
 
   // Setting render dimensions
   // simp_window_width, simp_window_height := Simp.get_render_dimensions(MAIN_ENGINE_WINDOW);
+  shaders_program := load_shaders(VERTEX_SHADER_PATH, FRAGMENT_SHADER_PATH);
+  print("%\n", #filepath);
+  print("Shaders program: %\n", shaders_program);
 
   // Setup simp stuff for getting rect?
   Simp.set_render_target(MAIN_ENGINE_WINDOW);
@@ -70,14 +77,14 @@ main :: () {
       handle_events(it);
     }
 
-  // Clearing screen
-  Simp.clear_render_target(.15, .08, .08, 1);
-  Simp.set_shader_for_color();
+    // Clearing screen
+    Simp.clear_render_target(.15, .08, .08, 1);
+    Simp.set_shader_for_color();
 
-  // Updating UI
-  // update_and_render_ui();
+    // Updating UI
+    // update_and_render_ui();
 
-  // Swapping buffers
-  Simp.swap_buffers(MAIN_ENGINE_WINDOW);
+    // Swapping buffers
+    Simp.swap_buffers(MAIN_ENGINE_WINDOW);
   }
 }
