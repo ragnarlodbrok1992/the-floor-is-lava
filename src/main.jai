@@ -3,6 +3,7 @@
 #import "GL";
 #import "Window_Creation";
 #import "Input";
+#import "String";
 
 // Named imports
 Simp :: #import "Simp";
@@ -14,8 +15,8 @@ GetRect :: #import "GetRect";
 #load "text.jai";
 
 // Shaders links
-VERTEX_SHADER_PATH   : string = "shaders/default.vert";
-FRAGMENT_SHADER_PATH : string = "shaders/default.frag";
+VERTEX_SHADER_PATH   : string = "../shaders/default.vert";
+FRAGMENT_SHADER_PATH : string = "../shaders/default.frag";
 
 // Engine consts
 WINDOW_TITLE_BAR : string = "The Floor Is Lava";
@@ -61,8 +62,22 @@ main :: () {
 
   // Setting render dimensions
   // simp_window_width, simp_window_height := Simp.get_render_dimensions(MAIN_ENGINE_WINDOW);
-  shaders_program := load_shaders(VERTEX_SHADER_PATH, FRAGMENT_SHADER_PATH);
+  // Setup shaders paths in runtime
+  vertex_builder, fragment_builder: String_Builder;
+
+  init_string_builder(*vertex_builder);
+  init_string_builder(*fragment_builder);
+
+  print_to_builder(*vertex_builder, "%%", #filepath, VERTEX_SHADER_PATH);
+  print_to_builder(*fragment_builder, "%%", #filepath, FRAGMENT_SHADER_PATH);
+
+  vertex_path := builder_to_string(*vertex_builder);
+  fragment_path := builder_to_string(*fragment_builder);
+
+  shaders_program := load_shaders(vertex_path, fragment_path);
   print("%\n", #filepath);
+  print("VSP: %\n", vertex_path);
+  print("FSP: %\n", fragment_path);
   print("Shaders program: %\n", shaders_program);
 
   // Setup simp stuff for getting rect?
