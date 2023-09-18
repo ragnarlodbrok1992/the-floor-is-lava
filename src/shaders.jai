@@ -22,6 +22,12 @@ load_shaders :: (vert_shader_source: string, frag_shader_source: string) -> GLui
   vertex_shader_id = glCreateShader(GL_VERTEX_SHADER);
   fragment_shader_id = glCreateShader(GL_FRAGMENT_SHADER);
 
+  print("Vert shader source: %\n", vert_shader_source);
+  print("Frag shader source: %\n", frag_shader_source);
+
+  print("Vert shader source -> to_c_string: %\n", to_c_string(vert_shader_source));
+  print("Frag shader source -> to_c_string: %\n", to_c_string(frag_shader_source));
+
   glShaderSource(vertex_shader_id, 1, *to_c_string(vert_shader_source), null);
   glCompileShader(vertex_shader_id);
 

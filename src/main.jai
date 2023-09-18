@@ -68,8 +68,10 @@ main :: () {
   init_string_builder(*vertex_builder);
   init_string_builder(*fragment_builder);
 
-  print_to_builder(*vertex_builder, "%%", #filepath, VERTEX_SHADER_PATH);
-  print_to_builder(*fragment_builder, "%%", #filepath, FRAGMENT_SHADER_PATH);
+  print_to_builder(*vertex_builder, "%", #filepath);
+  print_to_builder(*vertex_builder, "%", VERTEX_SHADER_PATH);
+  print_to_builder(*fragment_builder, "%", #filepath);
+  print_to_builder(*fragment_builder, "%", FRAGMENT_SHADER_PATH);
 
   vertex_path := builder_to_string(*vertex_builder);
   fragment_path := builder_to_string(*fragment_builder);
